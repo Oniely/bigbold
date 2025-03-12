@@ -1,8 +1,8 @@
 const Footer = () => {
 	return (
-		<div className="w-full h-[400px] bg-text text-bg flex items-center justify-center">
+		<section className="w-full h-[500px] bg-text text-bg flex items-center justify-center">
 			<h1 className="text-4xl font-mono">Footer</h1>
-		</div>
+		</section>
 	);
 };
 
