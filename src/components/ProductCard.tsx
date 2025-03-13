@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface Props {
 	img?: string;
@@ -17,14 +18,16 @@ const ProductCard = ({
 }: Props) => {
 	return (
 		<div className="flex flex-col w-[250px] relative">
-			<div className="w-full h-[280px] flex flex-col relative">
-				<Image
-					src={img || "/images/product/jacket.jpg"}
-					alt="Jacket"
-					className="object-cover"
-					fill
-				/>
-			</div>
+			<Link href="#">
+				<div className="w-full h-[280px] flex flex-col relative border-x border-t border-neutral-400/10">
+					<Image
+						src={img || "/images/product/jacket.jpg"}
+						alt="Jacket"
+						className="object-cover"
+						fill
+					/>
+				</div>
+			</Link>
 			<div className="flex flex-col py-3 px-2 text-black font-mono w-full">
 				<p className="text-sm">{name}</p>
 				<p className="text-sm">${price} USD</p>

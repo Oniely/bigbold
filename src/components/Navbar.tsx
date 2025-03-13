@@ -1,10 +1,23 @@
+"use client";
+
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
 	return (
-		<div className="p-3 bg-transparent fixed top-0 w-full z-50">
-			<div className="flex items-center justify-between py-2 px-5 bg-[#1e1e1e] rounded-lg text-white">
+		<motion.div
+			className="p-3 bg-transparent fixed top-0 w-full z-50 flex items-center justify-center"
+			initial={{ y: -80 }}
+			animate={{ y: 0 }}
+			transition={{ duration: 0.5, ease: "circOut" }}
+		>
+			<motion.div
+				initial={{ width: "80%" }}
+				animate={{ width: "100%" }}
+				transition={{ duration: 0.6, ease: "circOut" }}
+				className="flex items-center justify-between py-2 px-5 bg-[#1e1e1e] rounded-lg text-white"
+			>
 				<a href="#">
 					<h1 className="text-lg font-medium flex items-center">
 						<Image
@@ -35,8 +48,8 @@ const Navbar = () => {
 						</li>
 					</ul>
 				</nav>
-			</div>
-		</div>
+			</motion.div>
+		</motion.div>
 	);
 };
 
