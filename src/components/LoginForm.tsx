@@ -3,7 +3,9 @@
 import { login } from "@/lib/action/auth";
 import { loginSchema } from "@/lib/schema/auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useActionState, useState } from "react";
+import Loading from "./Loading";
 
 const LoginForm = () => {
 	const [formValues, setFormValues] = useState({
@@ -11,6 +13,7 @@ const LoginForm = () => {
 		password: "",
 	});
 	const [errors, setErrors] = useState<any>({});
+	const router = useRouter();
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormValues({ ...formValues, [e.target.name]: e.target.value });
@@ -33,7 +36,14 @@ const LoginForm = () => {
 			return;
 		}
 
-		await login(result.data);
+		const res = await login(result.data);
+
+		if (res?.error) {
+			setErrors({ email: res.error });
+			return;
+		} else {
+			router.push("/");
+		}
 	}
 
 	const [state, formAction, isPending] = useActionState(handleSubmit, null);
@@ -67,7 +77,7 @@ const LoginForm = () => {
 					)}
 				</div>
 				<input
-					type="text"
+					type="password"
 					name="password"
 					value={formValues.password}
 					onChange={handleChange}
@@ -78,7 +88,7 @@ const LoginForm = () => {
 				className="w-full py-4 font-semibold cursor-pointer bg-text text-bg hover:bg-text/90 disabled:bg-[#333]/90"
 				disabled={isPending}
 			>
-				Login
+				{isPending ? <Loading color="#FFF" /> : "Sign up"}
 			</button>
 			<p className="text-sm text-center">
 				Don't have an account?{" "}
